@@ -4,16 +4,16 @@ REM et l'affichage de l'invite de commandes,
 REM avec @ pour ne pas afficher la commande ECHO OFF elle même.
 
 REM *****************************************************************************************************************************************
-REM
-REM ___  ___        _____                                           _  ______                          _     _   _ _   _ _ _ _   _            
-REM |  \/  |       /  __ \                                         | | | ___ \                        | |   | | | | | (_) (_) | (_)           
-REM | .  . |_   _  | /  \/ ___  _ __ ___  _ __ ___   __ _ _ __   __| | | |_/ / __ ___  _ __ ___  _ __ | |_  | | | | |_ _| |_| |_ _  ___  ___  
-REM | |\/| | | | | | |    / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` | |  __/ '__/ _ \| '_ ` _ \| '_ \| __| | | | | __| | | | __| |/ _ \/ __| 
-REM | |  | | |_| | | \__/\ (_) | | | | | | | | | | | (_| | | | | (_| | | |  | | | (_) | | | | | | |_) | |_  | |_| | |_| | | | |_| |  __/\__ \ 
-REM \_|  |_/\__, |  \____/\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_| \_|  |_|  \___/|_| |_| |_| .__/ \__|  \___/ \__|_|_|_|\__|_|\___||___/ 
-REM          __/ |                                                                              | |                                           
-REM         |___/                                                                               |_|                                           
-REM
+::
+:: ___  ___        _____                                           _  ______                          _     _   _ _   _ _ _ _   _            
+:: |  \/  |       /  __ \                                         | | | ___ \                        | |   | | | | | (_) (_) | (_)           
+:: | .  . |_   _  | /  \/ ___  _ __ ___  _ __ ___   __ _ _ __   __| | | |_/ / __ ___  _ __ ___  _ __ | |_  | | | | |_ _| |_| |_ _  ___  ___  
+:: | |\/| | | | | | |    / _ \| '_ ` _ \| '_ ` _ \ / _` | '_ \ / _` | |  __/ '__/ _ \| '_ ` _ \| '_ \| __| | | | | __| | | | __| |/ _ \/ __| 
+:: | |  | | |_| | | \__/\ (_) | | | | | | | | | | | (_| | | | | (_| | | |  | | | (_) | | | | | | |_) | |_  | |_| | |_| | | | |_| |  __/\__ \ 
+:: \_|  |_/\__, |  \____/\___/|_| |_| |_|_| |_| |_|\__,_|_| |_|\__,_| \_|  |_|  \___/|_| |_| |_| .__/ \__|  \___/ \__|_|_|_|\__|_|\___||___/ 
+::          __/ |                                                                              | |                                           
+::         |___/                                                                               |_|                                           
+::
 REM *****************************************************************************************************************************************
 
 REM Récupération du code page actuel dans une variable,
@@ -53,6 +53,7 @@ ECHO    11. DirectX Diagnostic Tool, DxDiag                     - (Window)
 ECHO    12. Désinstaller ou modifier un programme               - (Window)
 ECHO    13. Informations d’identification stockées              - (Prompt)
 ECHO    14. Code Page - Encodage du texte affiché               - (Prompt)
+ECHO    15. Propriétès de Internet                              - (Window)
 ECHO    ----------------------
 ECHO    99. Backend
 ECHO    ----------------------
@@ -75,6 +76,7 @@ IF /I "%choice1%"=="11" (GOTO dxdiag)
 IF /I "%choice1%"=="12" (GOTO appwiz)
 IF /I "%choice1%"=="13" (GOTO cmdkeylist)
 IF /I "%choice1%"=="14" (GOTO chcp)
+IF /I "%choice1%"=="15" (GOTO inetcpl)
 IF /I "%choice1%"=="99" (GOTO backendmenu)
 IF /I "%choice1%"=="00" (GOTO quitmenu)
 
@@ -186,7 +188,7 @@ cmdkey /list
 CALL :whenready
 GOTO startmenu
 
-:: 014 - Informations d’identification actuellement stockées
+:: 014 - Informations Code Page
 :chcp
 COLOR 1F
 CLS
@@ -203,8 +205,18 @@ ECHO    ******************************************
 ECHO.
 ECHO    Page de codes active : %NEWCHCP%
 ECHO.
+ECHO    *****************************
+ECHO    *   Informations Code Page   *
+ECHO    *****************************
+ECHO.
+ECHO    Code Page : 850    ; pour encodage en Multilingual (Latin I), par défaut.
+ECHO    Code Page : 65001  ; pour encodage en UTF-8 (universel, surtout pour les accents).
 CALL :whenready
+GOTO startmenu
 
+:: 015 - Propriétès de Internet
+:inetcpl
+inetcpl.cpl
 GOTO startmenu
 
 :: 099 - Backend
