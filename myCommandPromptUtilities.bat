@@ -54,6 +54,8 @@ ECHO    12. Désinstaller ou modifier un programme               - (Window)
 ECHO    13. Informations d’identification stockées              - (Prompt)
 ECHO    14. Code Page - Encodage du texte affiché               - (Prompt)
 ECHO    15. Propriétès de Internet                              - (Window)
+ECHO    16. Applications au démarrage de Windows                - (Window)
+ECHO    17. Connexions réseaux                                  - (Window)
 ECHO    ----------------------
 ECHO    99. Backend
 ECHO    ----------------------
@@ -77,6 +79,8 @@ IF /I "%choice1%"=="12" (GOTO appwiz)
 IF /I "%choice1%"=="13" (GOTO cmdkeylist)
 IF /I "%choice1%"=="14" (GOTO chcp)
 IF /I "%choice1%"=="15" (GOTO inetcpl)
+IF /I "%choice1%"=="16" (GOTO startupapps)
+IF /I "%choice1%"=="17" (GOTO ncpacpl)
 IF /I "%choice1%"=="99" (GOTO backendmenu)
 IF /I "%choice1%"=="00" (GOTO quitmenu)
 
@@ -217,6 +221,16 @@ GOTO startmenu
 :: 015 - Propriétès de Internet
 :inetcpl
 inetcpl.cpl
+GOTO startmenu
+
+:: 016 - Applications au démarrage de Windows
+:startupapps
+start ms-settings:startupapps
+GOTO startmenu
+
+:: 017 - Connexions réseaux
+:ncpacpl
+ncpa.cpl
 GOTO startmenu
 
 :: 099 - Backend
